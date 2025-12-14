@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using GRMPlatform.Models;
 using GRMPlatform.Services;
 
@@ -43,7 +44,8 @@ namespace GRMPlatform
             catch (FileNotFoundException ex)
             {
                 Console.WriteLine($"Error: File not found - {ex.Message}");
-                Console.WriteLine("Make sure MusicContracts.txt and PartnerContracts.txt are in the same folder as the executable.");
+                Console.WriteLine($"Current directory: {Directory.GetCurrentDirectory()}");
+                Console.WriteLine($"Executable location: {Assembly.GetExecutingAssembly().Location}");
             }
             catch (ArgumentException ex)
             {
@@ -59,22 +61,32 @@ namespace GRMPlatform
             }
         }
 
-        /// <summary>
-        /// Loads music contracts from a pipe-delimited text file
-        /// Format: Artist|Title|Usages|StartDate|EndDate
-        /// </summary>
+        static string FindFile(string fileName)
+        {
+            // Location 1: Current directory
+            if (File.Exists(fileName))
+                return fileName;
+
+            // Location 2: Same directory as the executable
+            var exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var exeFile = Path.Combine(exeDir, fileName);
+            if (File.Exists(exeFile))
+                return exeFile;
+
+            // Location 3: Project directory (when running with dotnet run)
+            var currentDir = Directory.GetCurrentDirectory();
+            if (File.Exists(Path.Combine(currentDir, fileName)))
+                return Path.Combine(currentDir, fileName);
+
+            throw new FileNotFoundException($"Could not find {fileName} in any expected location");
+        }
+
         static List<MusicContract> LoadMusicContracts(string filePath)
         {
             var contracts = new List<MusicContract>();
-            
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException($"Music contracts file not found: {filePath}");
-            }
+            var fullPath = FindFile(filePath);
+            var lines = File.ReadAllLines(fullPath);
 
-            var lines = File.ReadAllLines(filePath);
-
-            // Skip the header line (line 0)
             for (int i = 1; i < lines.Length; i++)
             {
                 var line = lines[i].Trim();
@@ -84,12 +96,10 @@ namespace GRMPlatform
                 var parts = line.Split('|');
                 if (parts.Length >= 4)
                 {
-                    // Parse the usages - they're comma-separated
                     var usages = parts[2].Split(',')
                         .Select(u => u.Trim())
                         .ToList();
 
-                    // End date is optional (can be empty)
                     var endDate = parts.Length > 4 && !string.IsNullOrWhiteSpace(parts[4]) 
                         ? parts[4].Trim() 
                         : null;
@@ -108,22 +118,12 @@ namespace GRMPlatform
             return contracts;
         }
 
-        /// <summary>
-        /// Loads partner contracts from a pipe-delimited text file
-        /// Format: Partner|Usage
-        /// </summary>
         static List<PartnerContract> LoadPartnerContracts(string filePath)
         {
             var contracts = new List<PartnerContract>();
-            
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException($"Partner contracts file not found: {filePath}");
-            }
+            var fullPath = FindFile(filePath);
+            var lines = File.ReadAllLines(fullPath);
 
-            var lines = File.ReadAllLines(filePath);
-
-            // Skip the header line (line 0)
             for (int i = 1; i < lines.Length; i++)
             {
                 var line = lines[i].Trim();
