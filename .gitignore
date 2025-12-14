@@ -1,0 +1,26 @@
+GRMPlatform/bin/Debug/net9.0/GRMPlatform
+# Build results
+[Dd]ebug/
+[Dd]ebug[Pp]ublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# NuGet and project files
+project.assets.json
+project.nuget.cache
+*.nuget.props
+*.nuget.targets
+*.lock.json
+GRMPlatform.Tests/obj/project.assets.json
+GRMPlatform.Tests/obj/project.nuget.cache
+GRMPlatform.Tests/obj/project.assets.json
