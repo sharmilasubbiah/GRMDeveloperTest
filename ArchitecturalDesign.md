@@ -56,5 +56,146 @@ ITunes  | digital download
 YouTube | streaming
 
 
+### Project Structure
+```
+GRMDeveloperTest/
+├── GRMPlatform/                    # Main Console Application
+│   ├── Models/                     # Data Models
+│   │   ├── MusicContract.cs
+│   │   ├── PartnerContract.cs
+│   │   └── ProductAvailability.cs
+│   ├── Services/                   # Business Logic
+│   │   └── GlobalRightsManager.cs
+│   ├── Utilities/                  # Helper Classes
+│   │   └── DateParser.cs
+│   ├── Program.cs                  # Entry Point
+│   ├── MusicContracts.txt         # Test Data
+│   ├── PartnerContracts.txt       # Test Data
+│   └── GRMPlatform.csproj
+│
+├── GRMPlatform.Tests/             # Unit Tests
+│   ├── GlobalRightsManagerTests.cs
+│   ├── DateParserTests.cs
+│   └── GRMPlatform.Tests.csproj
+│
+├── GRMPlatform.sln                # Solution File
+├── ArchitecturalDesign.md         # This File
+├── README.md                      # ReadMe File
+├── QUICK_TEST.md                  # Quick_Test File
+└── verify-repo.sh                 # Verify-repo File
+
+```
+
+
+**Layered Architecture:**
+- **Presentation Layer**: `Program.cs` - Handles I/O and CLI
+- **Business Logic Layer**: `GlobalRightsManager` - Core filtering logic
+- **Utility Layer**: `DateParser` - Custom date parsing
+- **Data Layer**: Models - Simple POCOs
+
+**Design Principles Applied:**
+- **Single Responsibility Principle** - Each class has one clear purpose
+- **Dependency Injection** - Testable design via constructor injection
+- **Separation of Concerns** - Clear boundaries between layers
+- **Open/Closed Principle** - Easy to extend without modification
+
+
+
+### Key Components
+
+#### 1. GlobalRightsManager
+**Purpose**: Core business logic for contract filtering
+
+**Key Features:**
+- Two-stage filtering (usage type, then date range)
+- Case-insensitive partner matching
+- Handles optional end dates
+- Returns sorted results
+
+#### 2. DateParser
+**Purpose**: Parses custom date format with ordinal suffixes
+
+**Handles:**
+- "1st Feb 2012" → DateTime(2012, 2, 1)
+- "25st Dec 2012" → DateTime(2012, 12, 25) (handles typos)
+- Supports both short ("Feb") and long ("February") month names
+
+#### 3. Models
+**Purpose**: Clean data structures with no business logic
+- `MusicContract` - Artist agreements
+- `PartnerContract` - Distribution partner info
+- `ProductAvailability` - Output format
+
+---
+
+
+## 💡 Design Decisions & Trade-offs
+
+### 1. Custom Date Parser
+**Decision**: Created dedicated `DateParser` utility class
+
+**Rationale**: Standard `DateTime.Parse()` doesn't handle ordinal suffixes ("1st", "2nd", "3rd")
+
+**Implementation**: Regex to strip suffixes, then standard parsing
+
+### 2. In-Memory Processing
+**Decision**: Load all data into memory
+
+**Pros**: Simple, fast for small datasets  
+**Cons**: Limited scalability for large datasets  
+**Trade-off**: Appropriate for this use case; can be replaced with database later
+
+### 3. Dependency Injection
+**Decision**: Pass contracts via constructor
+
+**Pros**: Testable, no hidden dependencies  
+**Cons**: Slightly more verbose  
+**Trade-off**: Worth it for testability and maintainability
+
+### 4. Two-Stage Filtering
+**Decision**: Filter by usage first, then by date
+
+**Rationale**: Skip expensive date parsing if usage doesn't match
+
+**Performance**: O(n) complexity - linear in number of contracts
+
+---
+
+
+## 📝 Code Quality
+
+### Standards Applied
+- ✅ C# naming conventions
+- ✅ XML documentation comments
+- ✅ Clear variable and method names
+- ✅ Consistent code formatting
+- ✅ Error handling with meaningful messages
+
+### Metrics
+- **Lines of Code**: ~500 (excluding tests)
+- **Test Coverage**: 100% of specified scenarios + edge cases
+- **Cyclomatic Complexity**: Low (simple, maintainable logic)
+- **Build Warnings**: 0 (with nullable disabled)
+
+---
+
+## 🐛 Error Handling
+
+The application handles:
+- **Missing files**: Clear error message with file location
+- **Invalid partner**: ArgumentException with partner name
+- **Invalid date format**: FormatException with input value
+- **Malformed data**: Skips invalid lines, processes valid ones
+
+**Example Error Messages:**
+```bash
+Error: Partner 'Spotify' not found
+Error: Unable to parse date: Invalid Date
+Error: File not found - MusicContracts.txt
+```
+
+---
+
+
 
 
