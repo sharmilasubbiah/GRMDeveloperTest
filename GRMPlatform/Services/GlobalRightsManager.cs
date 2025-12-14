@@ -64,7 +64,7 @@ namespace GRMPlatform.Services
                 throw new ArgumentException($"Partner '{partnerName}' not found");
             }
 
-            //Parse the query date (only once!)
+            //Parse the query date (only once)
             DateTime queryDate = DateParser.Parse(effectiveDate);
 
             //Filter music contracts
@@ -76,7 +76,7 @@ namespace GRMPlatform.Services
                     continue; // Skip this contract - wrong usage type
                 }
 
-                // Get pre-parsed dates (much faster!)
+                // Get pre-parsed dates
                 var (contractStartDate, contractEndDate) = parsedDates[contract];
 
                 // Check if the query date falls within the contract period
@@ -85,7 +85,7 @@ namespace GRMPlatform.Services
 
                 if (isAfterStart && isBeforeEnd)
                 {
-                    // This contract is valid! Add it to results
+                    // This contract is valid ,Add it to results
                     results.Add(new ProductAvailability
                     {
                         Artist = contract.Artist,
