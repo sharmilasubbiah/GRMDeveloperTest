@@ -55,22 +55,22 @@ Partner | Usage
 ITunes  | digital download
 YouTube | streaming
 
+## 📁 Project Structure
 
-### Project Structure
-```
+```text
 GRMDeveloperTest/
-├── GRMPlatform/                    # Main Console Application
-│   ├── Models/                     # Data Models
+├── GRMPlatform/                  # Main Console Application
+│   ├── Models/                   # Data Models
 │   │   ├── MusicContract.cs
 │   │   ├── PartnerContract.cs
 │   │   └── ProductAvailability.cs
-│   ├── Services/                   # Business Logic
+│   ├── Services/                 # Business Logic
 │   │   └── GlobalRightsManager.cs
-│   ├── Utilities/                  # Helper Classes
+│   ├── Utilities/                # Helper Classes
 │   │   └── DateParser.cs
-│   ├── Program.cs                  # Entry Point
-│   ├── MusicContracts.txt         # Test Data
-│   ├── PartnerContracts.txt       # Test Data
+│   ├── Program.cs                # Entry Point
+│   ├── MusicContracts.txt        # Test Data
+│   ├── PartnerContracts.txt      # Test Data
 │   └── GRMPlatform.csproj
 │
 ├── GRMPlatform.Tests/             # Unit Tests
@@ -79,12 +79,11 @@ GRMDeveloperTest/
 │   └── GRMPlatform.Tests.csproj
 │
 ├── GRMPlatform.sln                # Solution File
-├── ArchitecturalDesign.md         # This File
-├── README.md                      # ReadMe File
-├── QUICK_TEST.md                  # Quick_Test File
-└── verify-repo.sh                 # Verify-repo File
+├── ArchitecturalDesign.md         # Architecture & Design Overview
+├── README.md                      # Project ReadMe
+├── QUICK_TEST.md                  # Quick Test Guide
+└── verify-repo.sh                 # Repository Verification Script
 
-```
 
 
 **Layered Architecture:**
