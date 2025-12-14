@@ -84,7 +84,7 @@ GRMDeveloperTest/
 ├── QUICK_TEST.md                  # Quick Test Guide
 └── verify-repo.sh                 # Repository Verification Script
 
-
+```
 
 **Layered Architecture:**
 - **Presentation Layer**: `Program.cs` - Handles I/O and CLI
