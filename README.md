@@ -1,19 +1,8 @@
 # GRM Platform - Global Rights Management Solution
 
-## 📋 Submission Overview
+##  Requirements Met
 
-This is a complete solution for the Recklass Rekkids (RR) Global Rights Management platform coding test. The application determines which music products are available for distribution partners based on contract agreements and effective dates.
-
-**Candidate**: Sharmila Subbiah  
-**Repository**: https://github.com/sharmilasubbiah/GRMDeveloperTest  
-**Completion Time**: ~3 hours  
-**Test Results**: ✅ 16/16 tests passing (100%)
-
----
-
-## 🎯 Requirements Met
-
-### ✅ Submission Checklist
+### Submission Checklist
 
 - [x] **Visual Studio Solution** - `GRMPlatform.sln`
 - [x] **Executable Console Application** - Command-line interface
@@ -21,7 +10,7 @@ This is a complete solution for the Recklass Rekkids (RR) Global Rights Manageme
 - [x] **Unit Tests** - 16 comprehensive test cases using xUnit
 - [x] **All Test Scenarios Pass** - Scenarios 1, 2, and 3 verified
 
-### ✅ Functional Requirements
+### Functional Requirements
 
 - [x] Reads music contracts and partner contracts from text files
 - [x] Accepts partner name and effective date as command-line arguments
@@ -33,9 +22,9 @@ This is a complete solution for the Recklass Rekkids (RR) Global Rights Manageme
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
-### Prerequisites
+### Prerequisitess
 - .NET 6.0 SDK or later
 - macOS, Linux, or Windows
 
@@ -72,7 +61,7 @@ dotnet run --project GRMPlatform -- YouTube "27th Dec 2012"
 
 ---
 
-## 📊 Test Results
+## Test Results
 
 ### Test Scenario 1: ITunes 1st March 2012
 **Expected Output:**
@@ -83,7 +72,7 @@ Monkey Claw|Motor Mouth|digital download|1st Mar 2011|
 Tinie Tempah|Frisky (Live from SoHo)|digital download|1st Feb 2012|
 Tinie Tempah|Miami 2 Ibiza|digital download|1st Feb 2012|
 ```
-✅ **Result**: PASS - Returns 4 digital download products
+**Result**: PASS - Returns 4 digital download products
 
 ### Test Scenario 2: YouTube 1st April 2012
 **Expected Output:**
@@ -92,7 +81,7 @@ Artist|Title|Usage|StartDate|EndDate
 Monkey Claw|Motor Mouth|streaming|1st Mar 2011|
 Tinie Tempah|Frisky (Live from SoHo)|streaming|1st Feb 2012|
 ```
-✅ **Result**: PASS - Returns 2 streaming products
+**Result**: PASS - Returns 2 streaming products
 
 ### Test Scenario 3: YouTube 27th Dec 2012
 **Expected Output:**
@@ -103,7 +92,7 @@ Monkey Claw|Iron Horse|streaming|1st June 2012|
 Monkey Claw|Motor Mouth|streaming|1st Mar 2011|
 Tinie Tempah|Frisky (Live from SoHo)|streaming|1st Feb 2012|
 ```
-✅ **Result**: PASS - Returns 4 streaming products (including time-limited contract)
+**Result**: PASS - Returns 4 streaming products (including time-limited contract)
 
 ### Unit Test Summary
 ```
@@ -121,18 +110,18 @@ Success Rate: 100%
 ### Test Coverage
 
 **Functional Tests (Required Scenarios):**
-1. ✅ ITunes 1st March 2012
-2. ✅ YouTube 1st April 2012
-3. ✅ YouTube 27th Dec 2012
+1. ITunes 1st March 2012
+2. YouTube 1st April 2012
+3. YouTube 27th Dec 2012
 
 **Edge Case Tests:**
-4. ✅ Date before contract starts (should return empty)
-5. ✅ Date after contract ends (excludes expired)
-6. ✅ Invalid partner name (throws ArgumentException)
-7. ✅ Case-insensitive partner matching
+4. Date before contract starts (should return empty)
+5. Date after contract ends (excludes expired)
+6. Invalid partner name (throws ArgumentException)
+7. Case-insensitive partner matching
 
 **DateParser Tests:**
-8-16. ✅ 9 different date format variations
+8-16. 9 different date format variations
 
 ### Running Tests
 ```bash
@@ -181,16 +170,17 @@ dotnet test
 ---
 
 
-## 📚 Documentation
+## Documentation
 
 - **ArchitecturalDesign.md** - Comprehensive architecture diagrams and design decisions
 - **README.md** - This file
+- **ACCEPTANCE_CRITIRIA** - Ascceptance criteria for the Global Rights Management (GRM) Platform solution, based on the original specification requirements.
 - **Code Comments** - Inline XML documentation
 - **Git History** - Clear commit messages showing development progress
 
 ---
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 This implementation demonstrates:
 - Clean architecture principles
