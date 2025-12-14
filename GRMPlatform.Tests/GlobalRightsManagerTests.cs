@@ -222,5 +222,27 @@ namespace GRMPlatform.Tests
             Assert.Equal(4, results2.Count);
             Assert.Equal(4, results3.Count);
         }
+
+         [Fact]
+        public void Constructor_NullMusicContracts_ThrowsArgumentNullException()
+        {
+            // Arrange
+            var partnerContracts = GetTestPartnerContracts();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => 
+                new GlobalRightsManager(null, partnerContracts));
+        }
+
+        [Fact]
+        public void Constructor_NullPartnerContracts_ThrowsArgumentNullException()
+        {
+            // Arrange
+            var musicContracts = GetTestMusicContracts();
+
+            // Act & Assert
+            Assert.Throws<ArgumentNullException>(() => 
+                new GlobalRightsManager(musicContracts, null));
+        }
     }
 }
