@@ -14,7 +14,7 @@ namespace GRMPlatform
         {
             try
             {
-                // STEP 1: Validate command line arguments
+                //Validate command line arguments
                 if (args.Length < 2)
                 {
                     Console.WriteLine("Usage: GRMPlatform <Partner> <Date>");
@@ -26,15 +26,15 @@ namespace GRMPlatform
                 string partner = args[0];
                 string dateInput = string.Join(" ", args.Skip(1));
 
-                // STEP 2: Load data from text files
+                //Load data from text files
                 var musicContracts = LoadMusicContracts("MusicContracts.txt");
                 var partnerContracts = LoadPartnerContracts("PartnerContracts.txt");
 
-                // STEP 3: Create the rights manager and query for products
+                // Create the rights manager and query for products
                 var grm = new GlobalRightsManager(musicContracts, partnerContracts);
                 var results = grm.GetAvailableProducts(partner, dateInput);
 
-                // STEP 4: Output results in the required format
+                //Output results in the required format
                 Console.WriteLine("Artist|Title|Usage|StartDate|EndDate");
                 foreach (var result in results)
                 {
@@ -61,19 +61,19 @@ namespace GRMPlatform
             }
         }
 
-        static string FindFile(string fileName)
+        private static string FindFile(string fileName)
         {
-            // Location 1: Current directory
+            //Current directory
             if (File.Exists(fileName))
                 return fileName;
 
-            // Location 2: Same directory as the executable
+            //Same directory as the executable
             var exeDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var exeFile = Path.Combine(exeDir, fileName);
             if (File.Exists(exeFile))
                 return exeFile;
 
-            // Location 3: Project directory (when running with dotnet run)
+            //Project directory (when running with dotnet run)
             var currentDir = Directory.GetCurrentDirectory();
             if (File.Exists(Path.Combine(currentDir, fileName)))
                 return Path.Combine(currentDir, fileName);
@@ -81,7 +81,7 @@ namespace GRMPlatform
             throw new FileNotFoundException($"Could not find {fileName} in any expected location");
         }
 
-        static List<MusicContract> LoadMusicContracts(string filePath)
+        private static List<MusicContract> LoadMusicContracts(string filePath)
         {
             var contracts = new List<MusicContract>();
             var fullPath = FindFile(filePath);
@@ -118,7 +118,7 @@ namespace GRMPlatform
             return contracts;
         }
 
-        static List<PartnerContract> LoadPartnerContracts(string filePath)
+        private static List<PartnerContract> LoadPartnerContracts(string filePath)
         {
             var contracts = new List<PartnerContract>();
             var fullPath = FindFile(filePath);
