@@ -5,7 +5,6 @@
     <TargetFramework>net9.0</TargetFramework>
      <RootNamespace>GRMPlatform</RootNamespace>
     <AssemblyName>GRMPlatform</AssemblyName>
- <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <None Update="*.txt">
