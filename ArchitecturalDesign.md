@@ -81,6 +81,7 @@ GRMDeveloperTest/
 ├── GRMPlatform.sln                # Solution File
 ├── ArchitecturalDesign.md         # Architecture & Design Overview
 ├── ACCEPTANCE_CRITIRIA.md         # Acceptance Critiria
+├── FORK_TEST_GUIDE.md             # Clone verification
 ├── README.md                      # Project ReadMe
 ├── QUICK_TEST.md                  # Quick Test Guide
 └── verify-repo.sh                 # Repository Verification Script
