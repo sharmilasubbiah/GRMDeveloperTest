@@ -132,28 +132,28 @@ GRMDeveloperTest/
 
 ## Design Decisions & Trade-offs
 
-### 1. Custom Date Parser
+### Custom Date Parser
 **Decision**: Created dedicated `DateParser` utility class
 
 **Rationale**: Standard `DateTime.Parse()` doesn't handle ordinal suffixes ("1st", "2nd", "3rd")
 
 **Implementation**: Regex to strip suffixes, then standard parsing
 
-### 2. In-Memory Processing
+### In-Memory Processing
 **Decision**: Load all data into memory
 
 **Pros**: Simple, fast for small datasets  
 **Cons**: Limited scalability for large datasets  
-**Trade-off**: Appropriate for this use case; can be replaced with database later
+**Trade-off**: Appropriate for this use case; can be replaced with database
 
-### 3. Dependency Injection
+### Dependency Injection
 **Decision**: Pass contracts via constructor
 
 **Pros**: Testable, no hidden dependencies  
 **Cons**: Slightly more verbose  
 **Trade-off**: Worth it for testability and maintainability
 
-### 4. Two-Stage Filtering
+### Two-Stage Filtering
 **Decision**: Filter by usage first, then by date
 
 **Rationale**: Skip expensive date parsing if usage doesn't match
